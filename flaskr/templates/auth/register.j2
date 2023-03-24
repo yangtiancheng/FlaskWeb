@@ -1,0 +1,36 @@
+{% extends 'base.j2' %}
+
+{% block header %}
+<h1>{% block titledetail %} - 注册{% endblock titledetail%}</h1>
+{% endblock %}
+
+{%- block styles %}
+{{ super() }}
+<!-- Currnt Html Special Styples -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{%- endblock styles %}
+
+{% block page_content %}
+<main class="form-signin w-100 m-auto">
+  <form method="post">
+    <div class="login-logo">
+      <img class="mb-4" src="{{ url_for('static', filename='img/logo.png') }}" alt="" width="72" height="57">
+      <h1 class="h3 mb-3 fw-normal">请输入用户/密码</h1>
+    </div>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" name="username" id="username" required>
+      <label for="username">用户名</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" name="password" id="password">
+      <label for="password">密码</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" name="password2" id="password2">
+      <label for="password">确认密码</label>
+    </div>
+    <input class="w-100 btn btn-lg btn-primary" type="submit" value="立即注册">
+  </form>
+</main>
+{% endblock %}

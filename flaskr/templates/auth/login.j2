@@ -1,0 +1,44 @@
+{% extends 'base.j2' %}
+
+{% block header %}
+<h1>{% block titledetail %} - 登录{% endblock titledetail%}</h1>
+{% endblock %}
+
+
+{%- block styles %}
+{{ super() }}
+<!-- Currnt Html Special Styples -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{%- endblock styles %}
+
+{% block page_content %}
+<main class="form-signin w-100 m-auto">
+  <form method="post">
+    <div class="login-logo">
+      <img class="mb-4" src="{{ url_for('static', filename='img/logo.png') }}" alt="" width="72" height="57">
+      <h1 class="h3 mb-3 fw-normal">请输入用户/密码</h1>
+    </div>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" name="username" id="username" required>
+      <label for="username">Username</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" name="password" id="password">
+      <label for="password">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> 保持登录
+      </label>
+    </div>
+    <input class="w-100 btn btn-lg btn-primary" type="submit" value="Login in">
+
+    <div class="form-floating" style="margin-top:10px;">
+      <a href="{{ url_for('auth.register') }}">注册账号</a>
+      <a href="#">忘记密码</a>
+    </div>
+  </form>
+</main>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'bootstrap/base.html' %}
+{% block title %}个人学习网站{% block titledetail %}{% endblock titledetail %}{% endblock title %}
+
+{%- block metas %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{%- endblock metas %}
+
+{%- block styles %}
+{{ super() }}
+<!-- Currnt Styples -->
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.0/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{%- endblock styles %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg bg-light rounded" aria-label="Eleventh navbar example">
+  <div class="container-fluid">
+    <a class="" href="#">Flaskr</a>
+    {# <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample09"
+      aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> #}
+
+    <div class="collapse navbar-collapse" id="navbarsExample09">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{{ url_for('index') }}">主页</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">笔记</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">生活</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">关于我</a>
+        </li>
+      </ul>
+
+
+      <ul class="navbar-nav text-lg-end">
+        {% if g.user %}
+        <li class="nav-item"><a class="nav-link" href="#">{{ g.user['username'] }}</a></li>
+        <li>
+          <a class="nav-link" aria-current="page" href="{{ url_for('auth.logout')}}">注销</a>
+        </li>
+        {% else %}
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login')}}">游客</a></li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{{ url_for('auth.login')}}">登录</a>
+        </li>
+        {% endif %}
+      </ul>
+      <form role="search">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
+    </div>
+  </div>
+</nav>
+
+{% endblock navbar %}
+
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+
+  {% block content %}
+  <div style="text-align: center!important;">
+      {% for message in get_flashed_messages() %}
+      <div class="flash">{{ message }}</div>
+      {% endfor %}
+  </div>
+
+  {% block page_content %}{% endblock %}
+
+  {% block footer %}
+  <div class="container">
+    <footer class="py-3 my-4">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQ</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Links</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+      </ul>
+
+      <div class="text-center small mt-2 pt-2">
+        <img src="https://www.beian.gov.cn/img/new/gongan.png">
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=61019002002007" target="_blank">
+          陕公网安备61019002002007号
+        </a>
+        <a href="https://beian.miit.gov.cn/" target="_blank">陕ICP备2021014373号-1</a>
+      </div>
+
+    </footer>
+  </div>
+  {% endblock footer %}
+
+  {% endblock %}
+
+  {% block scripts %}
+  <script src="{{url_for('static', filename='bootstrap-5.3.0/js/bootstrap.bundle.min.js')}}"></script>
+  {%- endblock scripts %}
+</section>

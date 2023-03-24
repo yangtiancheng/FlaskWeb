@@ -1,7 +1,14 @@
 import os
-
+from flask import redirect, render_template
 from flask import Flask
+from flask_bootstrap import Bootstrap
+from flask_migrate import Migrate
+from flask_moment import Moment
+from flask_sqlalchemy import SQLAlchemy
 
+bootstrap = Bootstrap()
+migrate = Migrate()
+moment = Moment()
 def create_app(test_config=None):
 
     app = Flask(__name__, instance_relative_config=True)
@@ -15,17 +22,21 @@ def create_app(test_config=None):
         app.config.from_mapping(test_config)
 
     try:
-        os.makedirs(app.instance_path)
+        if not os.path.exists(app.instance_path):
+            os.makedirs(app.instance_path)
     except OSError:
         pass
 
     from . import db
     db.init_app(app)
+    bootstrap.init_app(app)
+    migrate.init_app(app)
+    moment.init_app(app)
 
     # BluePrint Area
     @app.route('/')
     def index():
-        return 'Hello World!'
+        return render_template('base.j2')
     
     from . import auth
     app.register_blueprint(auth.bp)
