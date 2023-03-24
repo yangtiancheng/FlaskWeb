@@ -36,7 +36,19 @@ def create_app(test_config=None):
     # BluePrint Area
     @app.route('/')
     def index():
-        return render_template('base.j2')
+        return render_template('nav/index.j2')
+    
+    @app.route('/blog')
+    def blog():
+        return render_template('nav/blog.j2')
+    
+    @app.route('/life')
+    def life():
+        return render_template('nav/life.j2')
+    
+    @app.route('/about_me')
+    def about_me():
+        return render_template('nav/about_me.j2')
     
     from . import auth
     app.register_blueprint(auth.bp)

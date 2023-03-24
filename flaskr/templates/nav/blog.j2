@@ -1,0 +1,16 @@
+{% extends 'base.j2' %}
+
+{% block header %}
+<h1>{% block titledetail %} - 首页{% endblock titledetail%}</h1>
+{% endblock %}
+
+
+{%- block styles %}
+{{ super() }}
+{%- endblock styles %}
+
+{% block page_content %}
+<main class="form-signin w-100 m-auto">
+  <div style="text-align: center;"><h1><span>Blog page is developing...</span></h1></div>
+</main>
+{% endblock %}

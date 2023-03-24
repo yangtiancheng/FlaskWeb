@@ -27,20 +27,20 @@
           <a class="nav-link" aria-current="page" href="{{ url_for('index') }}">主页</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">笔记</a>
+          <a class="nav-link" href="{{ url_for('blog') }}">笔记</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">生活</a>
+          <a class="nav-link" href="{{ url_for('life') }}">生活</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">关于我</a>
+          <a class="nav-link" href="{{ url_for('about_me') }}">关于我</a>
         </li>
       </ul>
 
 
       <ul class="navbar-nav text-lg-end">
         {% if g.user %}
-        <li class="nav-item"><a class="nav-link" href="#">{{ g.user['username'] }}</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">{{ g.user['name'] }}</a></li>
         <li>
           <a class="nav-link" aria-current="page" href="{{ url_for('auth.logout')}}">注销</a>
         </li>

@@ -12,12 +12,21 @@ bp = Blueprint('auth',__name__, url_prefix='/auth')
 @bp.route('/register', methods=('GET','POST'))
 def register():
     if request.method == 'POST':
+        # 昵称
+        name = request.form['name']
+        # 登录名
         username = request.form['username']
+        # 密码
         password = request.form['password']
+        # 确认米面
         password2 = request.form['password2']
+
         db = get_db()
         error=None
-        if not username:
+        
+        if not name:
+            error = 'Name is required.'
+        elif not username:
             error = 'Username is required.'
         elif not password:
             error = 'Password is required.'
@@ -29,7 +38,7 @@ def register():
         if error is None:
             try:
                 db.execute(
-                    "insert into user(username, password) values (?, ?)", (username,generate_password_hash(password)),
+                    "insert into user(name, username, password) values (?, ?, ?)", (name, username, generate_password_hash(password)),
                     )
                 db.commit()
             except db.IntegrityError:
@@ -53,9 +62,9 @@ def login():
             ).fetchone()
         
         if user is None:
-            error = "Incorrect Username."
+            error = "验证错误：未找到相关用户!"
         elif not check_password_hash(user['password'], password):
-            error = "Incorrect Password."
+            error = "验证错误：账号或密码不正确!"
         
         if error is None:
             session.clear()
@@ -79,5 +88,5 @@ def load_logged_in_user():
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('auth.login'))
 
