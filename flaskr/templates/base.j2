@@ -51,7 +51,7 @@
 
         <ul class="navbar-nav text-lg-end">
           {% if g.user %}
-          <li class="nav-item"><a class="nav-link" href="#">{{ g.user['name'] }}</a></li>
+          <li class="nav-item"><a class="nav-link nav-ext-font-10" href="#">{{ g.user['name'] }}</a></li>
           <li>
             <a class="nav-link nav-ext-font-10" aria-current="page" href="{{ url_for('auth.logout')}}">注销</a>
           </li>
