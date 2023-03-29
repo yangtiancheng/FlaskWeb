@@ -50,7 +50,9 @@ def create_app(test_config=None):
     def about_me():
         return render_template('nav/about_me.j2')
     
-    from . import auth
-    app.register_blueprint(auth.bp)
+    from .auth import bp as auth_bp
+    app.register_blueprint(auth_bp)
+    from .blog import bp as blog_bp
+    app.register_blueprint(blog_bp)
     
     return app

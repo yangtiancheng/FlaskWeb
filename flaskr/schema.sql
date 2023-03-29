@@ -10,5 +10,10 @@ create table user (
 
 create table post (
     id integer primary key AUTOINCREMENT,
-    name text unique not null
+    author_id integer not null,
+    create_date timestamp not null default current_timestamp,
+    title text not null,
+    body text not null,
+    content text not null,
+    foreign key(author_id) references user(id)
 );

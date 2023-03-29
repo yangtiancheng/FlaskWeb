@@ -1,5 +1,11 @@
-from flaskr import create_app,db
+from setuptools import find_packages, setup
 
-if __name__ == '__main__':
-    app = create_app()
-    app.run(debug=True)
+setup(
+    name='flaskr',
+    version='1.0.0',
+    packages=find_packages(),
+    include_package_data=True,
+    install_requires=[
+        'flask',
+    ],
+)
